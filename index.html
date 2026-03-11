@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kit Operacional ACS - Organize sua visita</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        acs: {
+                            teal: '#14b8a6',
+                            dark: '#0f766e',
+                            light: '#f0fdfa',
+                            bg: '#f8fafc',
+                            ink: '#0f172a',
+                            muted: '#475569',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: theme('colors.acs.bg');
+            color: theme('colors.acs.ink');
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .cta-button {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: pulse-subtle 2s infinite;
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes pulse-subtle {
+            0% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(20, 184, 166, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
+        }
+
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Sticky Mobile CTA */
+        .mobile-cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 16px;
+            padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        @media (min-width: 768px) {
+            .mobile-cta-bar { display: none; }
+            body { padding-bottom: 0; }
+        }
+    </style>
+</head>
+<body class="font-sans pb-20 md:pb-0">
+
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
+        <div class="max-w-4xl mx-auto px-5 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="assets/logo-ig.png" alt="Logo" class="h-8 w-auto rounded-full object-contain" onerror="this.style.display='none'">
+                <div class="font-black text-acs-dark tracking-tighter text-lg">
+                    KIT OPERACIONAL ACS
+                </div>
+            </div>
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest hidden md:block">
+                Material de Campo
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-12 pb-16 px-5 bg-white border-b border-slate-200">
+        <div class="max-w-md mx-auto md:max-w-2xl text-center">
+            <h1 class="text-4xl md:text-5xl font-black text-acs-ink leading-[1.1] tracking-tight mb-5">
+                O problema não é visitar.<br>
+                <span class="text-acs-teal">É visitar e não validar.</span>
+            </h1>
+            
+            <p class="text-lg text-acs-muted font-medium mb-8 leading-relaxed">
+                O kit organiza a visita e tira o peso de ter que lembrar tudo na frente do paciente.
+            </p>
+
+            <ul class="text-left space-y-3 mb-10 bg-acs-light p-6 rounded-2xl border border-teal-100">
+                <li class="flex items-start gap-3">
+                    <span class="text-acs-teal text-xl leading-none mt-0.5">🟢</span>
+                    <span class="font-semibold text-slate-700">Organiza a visita domiciliar</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-acs-teal text-xl leading-none mt-0.5">🟢</span>
+                    <span class="font-semibold text-slate-700">Ajuda a não esquecer perguntas</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-acs-teal text-xl leading-none mt-0.5">🟢</span>
+                    <span class="font-semibold text-slate-700">Prova o que foi feito</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-acs-teal text-xl leading-none mt-0.5">🟢</span>
+                    <span class="font-semibold text-slate-700">Funciona sem internet</span>
+                </li>
+            </ul>
+
+            <a href="#oferta" class="cta-button block w-full bg-acs-teal text-white font-black text-lg py-5 px-8 rounded-2xl shadow-lg shadow-teal-500/30 uppercase tracking-wide">
+                Garantir Meu Kit – R$ 19,90
+            </a>
+            <p class="text-xs text-slate-400 mt-4 font-medium uppercase tracking-wider">Acesso imediato • Pagamento Seguro</p>
+        </div>
+    </header>
+
+    <section class="py-16 px-5 bg-acs-bg">
+        <div class="max-w-md mx-auto md:max-w-2xl">
+            <h2 class="text-2xl md:text-3xl font-black text-acs-ink mb-8 tracking-tight text-center">
+                O que acontece quando tudo fica <span class="text-rose-500 underline decoration-rose-200">só na cabeça?</span>
+            </h2>
+
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="w-10 h-10 shrink-0 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 text-xl font-bold">🔴</div>
+                    <p class="font-semibold text-slate-700">Esquece perguntas importantes durante a conversa.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="w-10 h-10 shrink-0 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 text-xl font-bold">🔴</div>
+                    <p class="font-semibold text-slate-700">Precisa voltar na casa só para confirmar um dado.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="w-10 h-10 shrink-0 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 text-xl font-bold">🔴</div>
+                    <p class="font-semibold text-slate-700">Fica inseguro na reunião de equipe na UBS.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="w-10 h-10 shrink-0 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 text-xl font-bold">🔴</div>
+                    <p class="font-semibold text-slate-700">Depende da memória o tempo todo, gerando cansaço.</p>
+                </div>
+            </div>
+
+            <p class="text-center text-acs-muted font-medium bg-slate-200/50 p-4 rounded-xl">
+                A sobrecarga mental impede você de criar vínculo real com as famílias. Você fica focado no sistema, não na pessoa.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16 px-5 bg-white border-y border-slate-100">
+        <div class="max-w-md mx-auto md:max-w-2xl text-center">
+            <span class="inline-block bg-teal-100 text-acs-dark font-bold text-xs px-3 py-1 rounded-full uppercase tracking-widest mb-4">A Solução</span>
+            <h2 class="text-3xl font-black text-acs-ink mb-4 tracking-tight">
+                Uma ferramenta simples para organizar o campo
+            </h2>
+            
+            <p class="text-lg text-acs-muted font-medium mb-10">
+                O kit coloca no papel o que normalmente você tenta lembrar durante a visita.
+            </p>
+
+            <div class="grid grid-cols-2 gap-4 text-left">
+                <div class="bg-acs-light p-5 rounded-2xl border border-teal-100">
+                    <span class="text-2xl block mb-2">📑</span>
+                    <h3 class="font-bold text-acs-ink mb-1">Fichas organizadas</h3>
+                    <p class="text-sm text-acs-muted">Tudo na ordem certa.</p>
+                </div>
+                <div class="bg-acs-light p-5 rounded-2xl border border-teal-100">
+                    <span class="text-2xl block mb-2">✅</span>
+                    <h3 class="font-bold text-acs-ink mb-1">Perguntas estruturadas</h3>
+                    <p class="text-sm text-acs-muted">Nada fica de fora.</p>
+                </div>
+                <div class="bg-acs-light p-5 rounded-2xl border border-teal-100">
+                    <span class="text-2xl block mb-2">✍️</span>
+                    <h3 class="font-bold text-acs-ink mb-1">Registro rápido</h3>
+                    <p class="text-sm text-acs-muted">Marca x, escreve e pronto.</p>
+                </div>
+                <div class="bg-acs-light p-5 rounded-2xl border border-teal-100">
+                    <span class="text-2xl block mb-2">🛡️</span>
+                    <h3 class="font-bold text-acs-ink mb-1">Mais segurança</h3>
+                    <p class="text-sm text-acs-muted">A prova do seu trabalho.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-5 bg-acs-bg">
+        <div class="max-w-md mx-auto md:max-w-4xl text-center">
+            <h2 class="text-3xl font-black text-acs-ink mb-12 tracking-tight">
+                O que você recebe hoje:
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 flex flex-col h-full">
+                    <div class="bg-slate-100 rounded-2xl aspect-[4/3] mb-5 overflow-hidden flex items-center justify-center relative">
+                        <img src="assets/fichas.jpg" alt="Fichas de acompanhamento" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNlMmU4ZjAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5NGEzYjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPkZpY2hhcyBwbGFjZWhvbGRlcjwvdGV4dD48L3N2Zz4='">
+                    </div>
+                    <div class="px-2 pb-2 flex-grow">
+                        <h3 class="font-black text-lg text-acs-ink mb-2">Fichas de Acompanhamento</h3>
+                        <p class="text-sm text-acs-muted">Páginas prontas para imprimir com as perguntas e métricas essenciais para cada tipo de paciente.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 flex flex-col h-full">
+                    <div class="bg-slate-100 rounded-2xl aspect-[4/3] mb-5 overflow-hidden flex items-center justify-center relative">
+                        <img src="assets/calendario-individual.jpg" alt="Calendário individual" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNlMmU4ZjAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5NGEzYjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPkNhbGVuZGFyaW8gcGxhY2Vob2xkZXI8L3RleHQ+PC9zdmc+'">
+                    </div>
+                    <div class="px-2 pb-2 flex-grow">
+                        <h3 class="font-black text-lg text-acs-ink mb-2">Calendário Individual & Equipe</h3>
+                        <p class="text-sm text-acs-muted">Visualize o mês inteiro, organize retornos, mapeie metas e sincronize com a sua UBS rapidamente.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 flex flex-col h-full">
+                    <div class="bg-slate-100 rounded-2xl aspect-[4/3] mb-5 overflow-hidden flex items-center justify-center relative">
+                        <img src="assets/hero.jpg" alt="Manual de uso" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNlMmU4ZjAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM5NGEzYjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPk1hbnVhbCBwbGFjZWhvbGRlcjwvdGV4dD48L3N2Zz4='">
+                    </div>
+                    <div class="px-2 pb-2 flex-grow">
+                        <h3 class="font-black text-lg text-acs-ink mb-2">Manual de Uso Prático</h3>
+                        <p class="text-sm text-acs-muted">Guia rápido em PDF ensinando exatamente como preencher, onde guardar e como usar na prancheta.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-5 bg-white border-y border-slate-100 overflow-hidden">
+        <div class="max-w-md mx-auto text-center">
+            <h2 class="text-3xl font-black text-acs-ink mb-10 tracking-tight">
+                Quem já usou entende
+            </h2>
+
+            <div class="bg-slate-100 p-2 rounded-2xl border border-slate-200 mb-6 overflow-hidden">
+                <img src="assets/prova-kit-01.jpg" alt="Prova Social - Kit Operacional" class="w-full h-auto rounded-xl" onerror="this.style.display='none'">
+            </div>
+
+            <p class="text-sm text-acs-muted font-medium mt-4">
+                Esse é um material vivo, já validado e utilizado por ACS no campo real de trabalho, todo santo dia.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16 px-5 bg-acs-bg">
+        <div class="max-w-md mx-auto md:max-w-xl">
+            <h2 class="text-2xl font-black text-acs-ink mb-8 tracking-tight text-center">
+                Perguntas Frequentes
+            </h2>
+
+            <div class="space-y-3">
+                <details class="group bg-white rounded-2xl border border-slate-200 p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-slate-800">
+                        Isso substitui o tablet?
+                        <span class="transition group-open:rotate-180 text-acs-teal text-xl">+</span>
+                    </summary>
+                    <p class="text-slate-600 mt-3 text-sm leading-relaxed">
+                        Não. Ele ajuda no registro durante a visita. Você anota com segurança no papel, de frente pro paciente, e depois passa para o tablet/sistema sem medo de ter esquecido algo.
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-slate-200 p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-slate-800">
+                        Funciona sem internet?
+                        <span class="transition group-open:rotate-180 text-acs-teal text-xl">+</span>
+                    </summary>
+                    <p class="text-slate-600 mt-3 text-sm leading-relaxed">
+                        Sim. Por ser um material físico (PDF para impressão), você não depende de sinal de Wi-Fi ou dados móveis na rua.
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-2xl border border-slate-200 p-5 cursor-pointer hover:bg-slate-50 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-slate-800">
+                        Por que usar papel na era digital?
+                        <span class="transition group-open:rotate-180 text-acs-teal text-xl">+</span>
+                    </summary>
+                    <p class="text-slate-600 mt-3 text-sm leading-relaxed">
+                        Porque reduz drasticamente a sua carga mental. O papel não trava, não descarrega e organiza o seu pensamento, permitindo que você olhe nos olhos da pessoa atendida.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="oferta" class="py-20 px-5 bg-acs-ink text-white rounded-t-[2.5rem] mt-4 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-acs-teal/30 blur-[80px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-md mx-auto relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-black mb-10 tracking-tight leading-tight">
+                Recupere o seu olhar no território
+            </h2>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 mb-8">
+                <p class="text-teal-300 font-bold uppercase tracking-widest text-xs mb-3">Valor do Kit Completo</p>
+                <div class="flex items-center justify-center gap-3 mb-1">
+                    <span class="text-slate-400 line-through text-lg font-medium">De R$ 30,00</span>
+                </div>
+                <div class="text-5xl font-black text-white mb-6">
+                    <span class="text-2xl font-bold align-top mt-1 inline-block">R$</span> 19,90
+                </div>
+
+                <ul class="text-left space-y-3 mb-8">
+                    <li class="flex items-center gap-3 text-sm font-medium">
+                        <span class="text-teal-400 text-lg">🔒</span> Compra 100% segura
+                    </li>
+                    <li class="flex items-center gap-3 text-sm font-medium">
+                        <span class="text-teal-400 text-lg">⚡</span> Acesso imediato
+                    </li>
+                    <li class="flex items-center gap-3 text-sm font-medium">
+                        <span class="text-teal-400 text-lg">🖨️</span> PDF pronto para imprimir
+                    </li>
+                </ul>
+
+                <a href="https://pay.hotmart.com/I101458561P" target="_blank" rel="noopener noreferrer" class="cta-button block w-full bg-acs-teal hover:bg-teal-400 text-white font-black text-lg py-5 px-6 rounded-2xl shadow-[0_0_30px_rgba(20,184,166,0.3)] uppercase tracking-wide">
+                    Quero o Meu Kit Agora
+                </a>
+            </div>
+            
+            <img src="https://logospng.org/download/hotmart/logo-hotmart-icon-1024.png" alt="Hotmart" class="h-6 mx-auto opacity-50 grayscale" onerror="this.style.display='none'">
+        </div>
+    </section>
+
+    <div class="mobile-cta-bar">
+        <div class="flex-1">
+            <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest">Kit em PDF</p>
+            <p class="text-lg font-black text-acs-ink">R$ 19,90</p>
+        </div>
+        <a href="https://pay.hotmart.com/I101458561P" target="_blank" rel="noopener noreferrer" class="cta-button bg-acs-teal hover:bg-teal-400 text-white font-black text-sm py-3 px-6 rounded-xl uppercase tracking-wider shrink-0 shadow-[0_0_15px_rgba(20,184,166,0.3)]">
+            BAIXAR AGORA
+        </a>
+    </div>
+
+</body>
+</html>
