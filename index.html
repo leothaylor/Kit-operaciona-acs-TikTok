@@ -357,5 +357,82 @@
         </a>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 🟢 1. Repasse de UTMs para links da Hotmart
+            const urlParams = window.location.search;
+            if (urlParams) {
+                const hotmartLinks = document.querySelectorAll('a[href*="pay.hotmart.com"]');
+                hotmartLinks.forEach(link => {
+                    // Substitui o '?' das UTMs por '&' pois o link já possui '?checkoutMode=10'
+                    const appendParams = urlParams.replace('?', '&');
+                    link.href = link.href + appendParams;
+                });
+            }
+
+            // 🟢 2. Rastreamento Específico de Cada Botão de Checkout
+            const ctas = document.querySelectorAll('.cta-button');
+            ctas.forEach(cta => {
+                cta.addEventListener('click', function() {
+                    let posicao = 'desconhecida';
+                    
+                    // Identifica a origem do clique pela hierarquia do HTML
+                    if (this.closest('header')) {
+                        posicao = 'topo';
+                    } else if (this.closest('#oferta')) {
+                        posicao = 'oferta_final';
+                    } else if (this.closest('.mobile-cta-bar')) {
+                        posicao = 'barra_mobile_fixa';
+                    }
+                    
+                    // Envia evento padrão de e-commerce do GA4
+                    gtag('event', 'begin_checkout', {
+                        'posicao': posicao,
+                        'value': 19.90,
+                        'currency': 'BRL',
+                        'items': [{
+                            'item_id': 'kit_operacional_acs',
+                            'item_name': 'Kit Operacional ACS'
+                        }]
+                    });
+                });
+            });
+
+            // 🟢 3. Rastreamento de Abertura de FAQ (Objeções)
+            const faqs = document.querySelectorAll('details');
+            faqs.forEach(faq => {
+                faq.addEventListener('toggle', function() {
+                    if (this.open) {
+                        // Pega o texto da pergunta e remove o "+" do final
+                        const questionText = this.querySelector('summary').innerText.replace('+', '').trim();
+                        
+                        gtag('event', 'faq_open', {
+                            'pergunta': questionText
+                        });
+                    }
+                });
+            });
+
+            // 🟢 4. Rastreamento de Chegada na Oferta (Scroll Profundo)
+            const ofertaSection = document.getElementById('oferta');
+            if (ofertaSection && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Envia evento quando o usuário visualizar a oferta
+                            gtag('event', 'view_promotion', {
+                                'secao': 'oferta_final'
+                            });
+                            // Desconecta após o primeiro disparo para não duplicar dados
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 }); // Dispara quando 30% da seção aparecer na tela
+                
+                observer.observe(ofertaSection);
+            }
+        });
+    </script>
 </body>
 </html>
