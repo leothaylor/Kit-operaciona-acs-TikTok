@@ -20,11 +20,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kit Operacional ACS | Material prático para registro no campo</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -50,8 +50,8 @@
 
     <style>
         body {
-            background-color: theme('colors.acs.bg');
-            color: theme('colors.acs.ink');
+            background-color: #f8fafc;
+            color: #0f172a;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -73,11 +73,11 @@
         details > summary {
             list-style: none;
         }
+
         details > summary::-webkit-details-marker {
             display: none;
         }
 
-        /* Sticky Mobile CTA */
         .mobile-cta-bar {
             position: fixed;
             bottom: 0;
@@ -92,13 +92,12 @@
             align-items: center;
             gap: 12px;
         }
-        
+
         @media (min-width: 768px) {
             .mobile-cta-bar { display: none; }
             body { padding-bottom: 0; }
         }
 
-        /* Lightbox Modal CSS */
         #imageModal {
             display: none;
             position: fixed;
@@ -110,11 +109,88 @@
             background-color: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(4px);
         }
+
         #imageModal.active {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+
+        .video-shell {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid rgb(226 232 240);
+            background: white;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0f172a;
+            overflow: hidden;
+        }
+
+        .video-thumbnail-btn {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            background: #0f172a;
+            display: block;
+        }
+
+        .video-thumbnail-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-thumbnail-btn::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15,23,42,0.08), rgba(15,23,42,0.3));
+        }
+
+        .video-play-badge {
+            position: absolute;
+            inset: 50% auto auto 50%;
+            transform: translate(-50%, -50%);
+            width: 78px;
+            height: 78px;
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: transform 0.2s ease;
+        }
+
+        .video-thumbnail-btn:hover .video-play-badge,
+        .video-thumbnail-btn:focus .video-play-badge {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .video-play-triangle {
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 18px solid #14b8a6;
+            margin-left: 4px;
+        }
+
+        .video-note {
+            background: #f8fafc;
+            border-top: 1px solid rgb(226 232 240);
         }
     </style>
 </head>
@@ -135,17 +211,50 @@
         </div>
     </nav>
 
-    <!-- 1 & 2. Hero + Benefícios Essenciais + CTA Inicial -->
+    <!-- Hero + Mini VSL + Benefícios Essenciais + CTA Inicial -->
     <header class="pt-12 pb-16 px-5 bg-white border-b border-slate-200">
         <div class="max-w-md mx-auto md:max-w-2xl text-center">
             <h1 class="text-4xl md:text-5xl font-black text-acs-ink leading-[1.1] tracking-tight mb-5">
                 O problema não é visitar.<br>
                 <span class="text-acs-teal">É visitar e depois ficar sem registro claro.</span>
             </h1>
-            
+
             <p class="text-lg text-acs-muted font-medium mb-8 leading-relaxed">
                 O Kit Operacional ACS é um material prático em PDF para organizar a visita, registrar no campo e trabalhar com mais segurança mesmo quando internet, tablet ou sistema falham.
             </p>
+
+            <!-- Mini VSL -->
+            <div class="mb-8 text-left">
+                <p class="text-center text-sm md:text-base font-bold text-acs-ink mb-4">
+                    Na prática, é assim que isso resolve na rotina:
+                </p>
+
+                <div class="video-shell">
+                    <div class="video-embed" id="vsl-container">
+                        <button
+                            type="button"
+                            id="vsl-thumbnail"
+                            class="video-thumbnail-btn"
+                            aria-label="Assistir apresentação do Kit Operacional ACS"
+                        >
+                            <img
+                                src="https://i.ytimg.com/vi/OIVnTtQBm7g/hqdefault.jpg"
+                                alt="Assistir apresentação do Kit Operacional ACS"
+                                loading="lazy"
+                            >
+                            <div class="video-play-badge" aria-hidden="true">
+                                <div class="video-play-triangle"></div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="video-note px-5 py-4">
+                        <p class="text-sm font-semibold text-slate-700">
+                            Vídeo rápido mostrando como o material funciona na prática, no contexto real de campo.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <ul class="text-left space-y-3 mb-8 bg-acs-light p-6 rounded-2xl border border-teal-100">
                 <li class="flex items-start gap-3">
@@ -169,7 +278,7 @@
         </div>
     </header>
 
-    <!-- 3. Veja o material por dentro (Trazido para cima) -->
+    <!-- Veja o material por dentro -->
     <section class="py-16 px-5 bg-slate-50 border-b border-slate-200">
         <div class="max-w-md mx-auto md:max-w-4xl text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-4 tracking-tight">
@@ -208,13 +317,13 @@
         </div>
     </section>
 
-    <!-- 4. O que é / O que não é -->
+    <!-- O que é / O que não é -->
     <section class="py-12 px-5 bg-acs-ink text-white">
         <div class="max-w-md mx-auto md:max-w-2xl">
             <h2 class="text-2xl font-black mb-8 tracking-tight text-center text-white">
                 Definição clara do material
             </h2>
-            
+
             <div class="space-y-4">
                 <div class="bg-teal-900/40 p-6 rounded-2xl border border-teal-500/30">
                     <h3 class="text-teal-400 font-bold mb-2 flex items-center gap-2"><span>🟢</span> O QUE É</h3>
@@ -222,7 +331,7 @@
                         Um kit estruturado em PDF com ferramentas visuais. Serve especificamente para registrar dados com firmeza durante a visita e ter um apoio de campo caso a tecnologia oficial (internet/tablet) fique inoperante.
                     </p>
                 </div>
-                
+
                 <div class="bg-rose-900/20 p-6 rounded-2xl border border-rose-500/20">
                     <h3 class="text-rose-400 font-bold mb-2 flex items-center gap-2"><span>🔴</span> O QUE NÃO É</h3>
                     <p class="text-sm font-medium leading-relaxed text-slate-400">
@@ -233,7 +342,7 @@
         </div>
     </section>
 
-    <!-- 5. Problemas da rotina -->
+    <!-- Problemas da rotina -->
     <section class="py-16 px-5 bg-white">
         <div class="max-w-md mx-auto md:max-w-2xl">
             <h2 class="text-2xl md:text-3xl font-black text-acs-ink mb-8 tracking-tight text-center">
@@ -261,13 +370,13 @@
         </div>
     </section>
 
-    <!-- 6. Benefícios práticos -->
+    <!-- Benefícios práticos -->
     <section class="py-16 px-5 bg-acs-bg border-y border-slate-200">
         <div class="max-w-md mx-auto md:max-w-2xl text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-10 tracking-tight">
                 Garantia de organização no território
             </h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                     <h3 class="font-bold text-acs-ink mb-1 flex items-center gap-2"><span class="text-acs-teal">🟢</span> Registro Blindado</h3>
@@ -281,7 +390,7 @@
         </div>
     </section>
 
-    <!-- 7. O que você recebe no kit -->
+    <!-- O que você recebe no kit -->
     <section class="py-16 px-5 bg-white">
         <div class="max-w-md mx-auto md:max-w-4xl text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-2 tracking-tight">
@@ -305,7 +414,7 @@
         </div>
     </section>
 
-    <!-- 8. Tutorial Prático (Reforço do passo a passo) -->
+    <!-- Tutorial Prático -->
     <section class="py-12 px-5 bg-acs-ink text-white">
         <div class="max-w-md mx-auto text-center">
             <h2 class="text-2xl font-black mb-4 tracking-tight">Pronto para uso imediato</h2>
@@ -313,7 +422,7 @@
         </div>
     </section>
 
-    <!-- 9. Prova social -->
+    <!-- Prova social -->
     <section class="py-16 px-5 bg-acs-bg border-y border-slate-100 overflow-hidden">
         <div class="max-w-md mx-auto text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-10 tracking-tight">
@@ -330,7 +439,7 @@
         </div>
     </section>
 
-    <!-- 10. FAQ -->
+    <!-- FAQ -->
     <section class="py-16 px-5 bg-white">
         <div class="max-w-md mx-auto md:max-w-xl">
             <h2 class="text-2xl font-black text-acs-ink mb-8 tracking-tight text-center">
@@ -367,7 +476,7 @@
                         Porque, na rotina real, internet falha, tablet trava e nem sempre dá para registrar tudo com segurança na hora. O papel entra como apoio de campo e contingência para proteger a informação.
                     </p>
                 </details>
-                
+
                 <details class="group bg-white rounded-2xl border border-slate-200 p-5 cursor-pointer hover:bg-slate-50 transition-colors">
                     <summary class="flex justify-between items-center font-bold text-slate-800">
                         Isso é curso?
@@ -391,7 +500,7 @@
         </div>
     </section>
 
-    <!-- 11. Oferta / Preço -->
+    <!-- Oferta / Preço -->
     <section id="oferta" class="py-20 px-5 bg-acs-ink text-white rounded-t-[2.5rem] mt-4 relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-acs-teal/30 blur-[80px] rounded-full pointer-events-none"></div>
 
@@ -404,7 +513,7 @@
                 <div class="flex items-center justify-center gap-3 mb-1">
                     <span class="text-yellow-400 line-through text-lg font-bold">De R$ 30,00</span>
                 </div>
-            
+
                 <div class="text-5xl font-black text-white mb-6">
                     <span class="text-2xl font-bold align-top mt-1 inline-block">R$</span> 19,90
                 </div>
@@ -425,7 +534,7 @@
                     Quero baixar o Kit agora
                 </a>
             </div>
-            
+
             <img src="https://logospng.org/download/hotmart/logo-hotmart-icon-1024.png" alt="Hotmart" class="h-6 mx-auto opacity-50 grayscale" onerror="this.style.display='none'">
         </div>
     </section>
@@ -441,18 +550,15 @@
         </a>
     </div>
 
-    <!-- Estrutura do Modal de Imagem -->
+    <!-- Modal de Imagem -->
     <div id="imageModal" class="hidden" onclick="closeLightbox()">
         <div class="relative w-full h-full flex flex-col justify-center items-center p-4">
-            <!-- Botão Fechar -->
             <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white bg-slate-800/80 hover:bg-slate-700 p-3 rounded-full font-bold text-xl leading-none shadow-lg z-50">
                 ✕
             </button>
-            
-            <!-- Imagem Principal -->
+
             <img id="lightboxImg" src="" alt="Visualização" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl mb-4" onclick="event.stopPropagation()">
-            
-            <!-- Controles -->
+
             <div class="flex gap-6 mt-4 z-50" onclick="event.stopPropagation()">
                 <button onclick="prevImage(event)" class="bg-acs-teal text-white px-6 py-3 rounded-xl font-bold uppercase text-sm shadow-lg hover:bg-teal-400">Anterior</button>
                 <button onclick="nextImage(event)" class="bg-acs-teal text-white px-6 py-3 rounded-xl font-bold uppercase text-sm shadow-lg hover:bg-teal-400">Próxima</button>
@@ -461,7 +567,6 @@
     </div>
 
     <script>
-        // 🟢 Lógica do Lightbox (Ampliar Imagens)
         const modal = document.getElementById('imageModal');
         const lightboxImg = document.getElementById('lightboxImg');
         const images = document.querySelectorAll('.expandable-img');
@@ -471,7 +576,7 @@
             currentIndex = index;
             updateLightbox();
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Evita scroll do fundo
+            document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
@@ -486,7 +591,7 @@
         }
 
         function nextImage(e) {
-            e.stopPropagation(); // Impede que feche o modal ao clicar no botão
+            e.stopPropagation();
             currentIndex = (currentIndex + 1) % images.length;
             updateLightbox();
         }
@@ -497,10 +602,29 @@
             updateLightbox();
         }
 
-        // 🟢 Scripts Originais (Intactos)
+        function loadVSL() {
+            const container = document.getElementById('vsl-container');
+            if (!container || container.dataset.loaded === 'true') return;
+
+            container.dataset.loaded = 'true';
+            container.innerHTML = `
+                <iframe
+                    src="https://www.youtube.com/embed/OIVnTtQBm7g?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+                    title="Apresentação do Kit Operacional ACS"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    style="position:absolute; inset:0; width:100%; height:100%;"
+                ></iframe>
+            `;
+
+            gtag('event', 'video_play', {
+                'video_name': 'mini_vsl_kit_operacional_acs',
+                'posicao': 'hero'
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. Repasse de UTMs para links da Hotmart
             const urlParams = window.location.search;
             if (urlParams) {
                 const hotmartLinks = document.querySelectorAll('a[href*="pay.hotmart.com"]');
@@ -510,12 +634,11 @@
                 });
             }
 
-            // 2. Rastreamento Específico de Cada Botão de Checkout
             const ctas = document.querySelectorAll('.cta-button');
             ctas.forEach(cta => {
                 cta.addEventListener('click', function() {
                     let posicao = 'desconhecida';
-                    
+
                     if (this.closest('header')) {
                         posicao = 'topo';
                     } else if (this.closest('#oferta')) {
@@ -523,7 +646,7 @@
                     } else if (this.closest('.mobile-cta-bar')) {
                         posicao = 'barra_mobile_fixa';
                     }
-                    
+
                     gtag('event', 'begin_checkout', {
                         'posicao': posicao,
                         'value': 19.90,
@@ -536,13 +659,12 @@
                 });
             });
 
-            // 3. Rastreamento de Abertura de FAQ (Objeções)
             const faqs = document.querySelectorAll('details');
             faqs.forEach(faq => {
                 faq.addEventListener('toggle', function() {
                     if (this.open) {
                         const questionText = this.querySelector('summary').innerText.replace('+', '').trim();
-                        
+
                         gtag('event', 'faq_open', {
                             'pergunta': questionText
                         });
@@ -550,7 +672,6 @@
                 });
             });
 
-            // 4. Rastreamento de Chegada na Oferta (Scroll Profundo)
             const ofertaSection = document.getElementById('oferta');
             if (ofertaSection && 'IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
@@ -562,9 +683,14 @@
                             observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.3 }); 
-                
+                }, { threshold: 0.3 });
+
                 observer.observe(ofertaSection);
+            }
+
+            const vslTrigger = document.getElementById('vsl-thumbnail');
+            if (vslTrigger) {
+                vslTrigger.addEventListener('click', loadVSL);
             }
         });
     </script>
