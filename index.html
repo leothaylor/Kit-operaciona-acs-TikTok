@@ -196,7 +196,6 @@
 </head>
 <body class="font-sans pb-20 md:pb-0">
 
-    <!-- Navbar -->
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div class="max-w-4xl mx-auto px-5 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
@@ -211,7 +210,6 @@
         </div>
     </nav>
 
-    <!-- Hero + Mini VSL + Benefícios Essenciais + CTA Inicial -->
     <header class="pt-12 pb-16 px-5 bg-white border-b border-slate-200">
         <div class="max-w-md mx-auto md:max-w-2xl text-center">
             <h1 class="text-4xl md:text-5xl font-black text-acs-ink leading-[1.1] tracking-tight mb-5">
@@ -223,7 +221,6 @@
                 O Kit Operacional ACS é um material prático em PDF para organizar a visita, registrar no campo e trabalhar com mais segurança mesmo quando internet, tablet ou sistema falham.
             </p>
 
-            <!-- Mini VSL -->
             <div class="mb-8 text-left">
                 <p class="text-center text-sm md:text-base font-bold text-acs-ink mb-4">
                     Na prática, é assim que isso resolve na rotina:
@@ -278,7 +275,6 @@
         </div>
     </header>
 
-    <!-- Veja o material por dentro -->
     <section class="py-16 px-5 bg-slate-50 border-b border-slate-200">
         <div class="max-w-md mx-auto md:max-w-4xl text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-4 tracking-tight">
@@ -317,7 +313,6 @@
         </div>
     </section>
 
-    <!-- O que é / O que não é -->
     <section class="py-12 px-5 bg-acs-ink text-white">
         <div class="max-w-md mx-auto md:max-w-2xl">
             <h2 class="text-2xl font-black mb-8 tracking-tight text-center text-white">
@@ -342,7 +337,6 @@
         </div>
     </section>
 
-    <!-- Problemas da rotina -->
     <section class="py-16 px-5 bg-white">
         <div class="max-w-md mx-auto md:max-w-2xl">
             <h2 class="text-2xl md:text-3xl font-black text-acs-ink mb-8 tracking-tight text-center">
@@ -370,7 +364,6 @@
         </div>
     </section>
 
-    <!-- Benefícios práticos -->
     <section class="py-16 px-5 bg-acs-bg border-y border-slate-200">
         <div class="max-w-md mx-auto md:max-w-2xl text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-10 tracking-tight">
@@ -390,7 +383,6 @@
         </div>
     </section>
 
-    <!-- O que você recebe no kit -->
     <section class="py-16 px-5 bg-white">
         <div class="max-w-md mx-auto md:max-w-4xl text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-2 tracking-tight">
@@ -414,7 +406,6 @@
         </div>
     </section>
 
-    <!-- Tutorial Prático -->
     <section class="py-12 px-5 bg-acs-ink text-white">
         <div class="max-w-md mx-auto text-center">
             <h2 class="text-2xl font-black mb-4 tracking-tight">Pronto para uso imediato</h2>
@@ -422,7 +413,6 @@
         </div>
     </section>
 
-    <!-- Prova social -->
     <section class="py-16 px-5 bg-acs-bg border-y border-slate-100 overflow-hidden">
         <div class="max-w-md mx-auto text-center">
             <h2 class="text-3xl font-black text-acs-ink mb-10 tracking-tight">
@@ -439,7 +429,6 @@
         </div>
     </section>
 
-    <!-- FAQ -->
     <section class="py-16 px-5 bg-white">
         <div class="max-w-md mx-auto md:max-w-xl">
             <h2 class="text-2xl font-black text-acs-ink mb-8 tracking-tight text-center">
@@ -500,7 +489,6 @@
         </div>
     </section>
 
-    <!-- Oferta / Preço -->
     <section id="oferta" class="py-20 px-5 bg-acs-ink text-white rounded-t-[2.5rem] mt-4 relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-acs-teal/30 blur-[80px] rounded-full pointer-events-none"></div>
 
@@ -539,7 +527,6 @@
         </div>
     </section>
 
-    <!-- Mobile Sticky CTA -->
     <div class="mobile-cta-bar">
         <div class="flex-1">
             <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest">Kit em PDF</p>
@@ -550,7 +537,6 @@
         </a>
     </div>
 
-    <!-- Modal de Imagem -->
     <div id="imageModal" class="hidden" onclick="closeLightbox()">
         <div class="relative w-full h-full flex flex-col justify-center items-center p-4">
             <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white bg-slate-800/80 hover:bg-slate-700 p-3 rounded-full font-bold text-xl leading-none shadow-lg z-50">
@@ -571,12 +557,21 @@
         const lightboxImg = document.getElementById('lightboxImg');
         const images = document.querySelectorAll('.expandable-img');
         let currentIndex = 0;
+        
+        // Rastreio de fotos: Nomes para o Analytics identificar o que estão olhando
+        const imageNames = ['Fichas', 'Calendario_ACS', 'Calendario_Equipe', 'Tutorial'];
 
         function openLightbox(index) {
             currentIndex = index;
             updateLightbox();
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Dispara evento para o Google Analytics saber qual foto chamou atenção
+            gtag('event', 'select_content', {
+                'content_type': 'image_gallery',
+                'item_id': imageNames[index] || 'imagem_desconhecida'
+            });
         }
 
         function closeLightbox() {
@@ -625,6 +620,17 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // EVENTO 1: Informa ao Analytics que a página de vendas foi aberta (View Item)
+            gtag('event', 'view_item', {
+                'currency': 'BRL',
+                'value': 19.90,
+                'items': [{
+                    'item_id': 'kit_operacional_acs',
+                    'item_name': 'Kit Operacional ACS'
+                }]
+            });
+
+            // Preservação de UTMs (Garante que os parâmetros passem para a Hotmart)
             const urlParams = window.location.search;
             if (urlParams) {
                 const hotmartLinks = document.querySelectorAll('a[href*="pay.hotmart.com"]');
@@ -634,17 +640,30 @@
                 });
             }
 
+            // EVENTO 2: Rastreio de Botões Blindado
             const ctas = document.querySelectorAll('.cta-button');
             ctas.forEach(cta => {
-                cta.addEventListener('click', function() {
-                    let posicao = 'desconhecida';
+                cta.addEventListener('click', function(e) {
+                    
+                    const isTargetBlank = this.getAttribute('target') === '_blank';
+                    const targetUrl = this.href;
 
+                    let posicao = 'desconhecida';
                     if (this.closest('header')) {
                         posicao = 'topo';
                     } else if (this.closest('#oferta')) {
                         posicao = 'oferta_final';
                     } else if (this.closest('.mobile-cta-bar')) {
                         posicao = 'barra_mobile_fixa';
+                    }
+
+                    // Se o link NÃO abre em nova aba, a gente pausa o redirecionamento
+                    // para dar tempo do Analytics processar (Trava de Segurança)
+                    if (!isTargetBlank) {
+                        e.preventDefault();
+                        setTimeout(() => {
+                            window.location.href = targetUrl;
+                        }, 800); // 800 milissegundos de margem
                     }
 
                     gtag('event', 'begin_checkout', {
@@ -654,17 +673,23 @@
                         'items': [{
                             'item_id': 'kit_operacional_acs',
                             'item_name': 'Kit Operacional ACS'
-                        }]
+                        }],
+                        // Assim que o Analytics termina de anotar, ele mesmo libera a ida pra Hotmart
+                        'event_callback': function() {
+                            if (!isTargetBlank) {
+                                window.location.href = targetUrl;
+                            }
+                        }
                     });
                 });
             });
 
+            // EVENTO 3: Rastreio de Dúvidas (FAQ)
             const faqs = document.querySelectorAll('details');
             faqs.forEach(faq => {
                 faq.addEventListener('toggle', function() {
                     if (this.open) {
                         const questionText = this.querySelector('summary').innerText.replace('+', '').trim();
-
                         gtag('event', 'faq_open', {
                             'pergunta': questionText
                         });
@@ -672,6 +697,7 @@
                 });
             });
 
+            // EVENTO 4: Rastreio de Scroll (Quem chega na oferta final)
             const ofertaSection = document.getElementById('oferta');
             if (ofertaSection && 'IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
