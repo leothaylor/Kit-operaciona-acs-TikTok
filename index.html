@@ -630,16 +630,6 @@
                 }]
             });
 
-            // Preservação de UTMs (Garante que os parâmetros passem para a Hotmart)
-            const urlParams = window.location.search;
-            if (urlParams) {
-                const hotmartLinks = document.querySelectorAll('a[href*="pay.hotmart.com"]');
-                hotmartLinks.forEach(link => {
-                    const appendParams = urlParams.replace('?', '&');
-                    link.href = link.href + appendParams;
-                });
-            }
-
             // EVENTO 2: Rastreio de Botões Blindado
             const ctas = document.querySelectorAll('.cta-button');
             ctas.forEach(cta => {
@@ -719,6 +709,22 @@
                 vslTrigger.addEventListener('click', loadVSL);
             }
         });
+    </script>
+    
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const utms = urlParams.toString();
+
+            if (utms) {
+                const links = document.querySelectorAll('a[href*="hotmart.com"]');
+                links.forEach(link => {
+                    let href = link.getAttribute('href');
+                    const separator = href.includes('?') ? '&' : '?';
+                    link.setAttribute('href', href + separator + utms);
+                });
+            }
+        })();
     </script>
 </body>
 </html>
